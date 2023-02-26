@@ -1,0 +1,11 @@
+<div class="row">
+  <aside class="col-md-4">
+    <section class="use_info">
+      <%= render "shared/success_messages" %>
+      <h1>
+        <%= image_tag @user.avatar.variant(:thumb) %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+</div>

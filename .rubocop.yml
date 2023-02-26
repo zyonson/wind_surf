@@ -7,3 +7,6 @@ AllCops:
     - "db/schema.rb"
     - "db/migrate/*"
   DisplayCopNames: true
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'

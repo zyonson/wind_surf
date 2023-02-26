@@ -1,0 +1,4 @@
+<% @users.each do |user| %>
+  <%= user.name %>
+  <%= image_tag user.avatar.variant(:thumb) %>
+<% end %>
