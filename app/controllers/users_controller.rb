@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include SessionsHelper
   def index
     @users = User.all
   end
@@ -11,10 +12,12 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def create
+  def create  # rubocop:disable all
     @user = User.new(user_params)
     avatar_check
     if @user.save
+      reset_session
+      log_in @user
       flash[:success] = 'create your account!'
       redirect_to @user
     else
