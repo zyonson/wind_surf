@@ -33,8 +33,6 @@ RSpec.describe 'User', type: :system do
       ), filename: 'default_icon.jpg', content_type: 'image/jpg')
     fill_in 'Name', with: 'eeee'
     fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
-    fill_in 'Password confirmation', with: user.password
     click_on 'Save Change'
     expect(current_path).to eq user_path(user)
     expect(user.reload.name).to eq 'eeee'
