@@ -3,7 +3,7 @@
     <section class="use_info">
       <%= render "shared/success_messages" %>
       <h1>
-        <%= image_tag @user.avatar.variant(:thumb) %>
+        <%= image_tag @user.avatar.variant(:thumb) if @user.avatar.attached? %>
         <%= @user.name %>
       </h1>
     </section>

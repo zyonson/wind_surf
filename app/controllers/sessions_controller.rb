@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   include SessionsHelper
+  before_action :log_ina, only: :edit
+
   def new; end
 
   def create
@@ -21,4 +23,10 @@ class SessionsController < ApplicationController
     flash[:success] = "logout"
     redirect_to login_path, status: :see_other
   end
+end
+
+private
+
+def log_ina
+  redirect_to(root_url, status: :see_other) unless logged_in?
 end

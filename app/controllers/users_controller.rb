@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
+  before_action :admin_user,     only: :destroy
+  before_action :log_in_as, only: [:edit, :index]
   include SessionsHelper
+
   def index
     @users = User.all
   end
@@ -40,6 +43,11 @@ class UsersController < ApplicationController
       redirect_to edit_user_path
     end
   end
+
+  def destroy
+    User.find(params[:id]).destroy
+    redirect_to new_user_path :see_other
+  end
 end
 
 private
@@ -47,6 +55,7 @@ private
 def user_params
   params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
 end
+
 # rubocop:disable all
 def avatar_check
   @user.avatar.attach(io: File.open(
@@ -54,3 +63,11 @@ def avatar_check
   ), filename: 'default_icon.jpg') unless @user.avatar.attached?
 end
 # rubocop:enable all
+
+def admin_user
+  redirect_to(root_url, status: :see_other) unless current_user.admin?
+end
+
+def log_in_as
+  redirect_to(login_path, status: :see_other) if current_user.nil?
+end

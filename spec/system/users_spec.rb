@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'User', type: :system do
+  include SessionsHelper
   before do
     driven_by(:rack_test)
   end
   let(:user) { FactoryBot.create(:user) }
+  let(:admin) { FactoryBot.create(:admin) }
   scenario "create new user" do
     visit new_user_path
     fill_in 'Name', with: 'aaaa'
@@ -27,6 +29,7 @@ RSpec.describe 'User', type: :system do
   end
 
   scenario "update account" do
+    login(user)
     visit edit_user_path(user)
     user.avatar.attach(io: File.open(
         Rails.root.join('app', 'assets', 'images', 'default_icon.jpg') # rubocop:disable all
@@ -36,5 +39,6 @@ RSpec.describe 'User', type: :system do
     click_on 'Save Change'
     expect(current_path).to eq user_path(user)
     expect(user.reload.name).to eq 'eeee'
+    visit users_path
   end
 end
