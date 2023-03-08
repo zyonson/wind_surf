@@ -7,10 +7,7 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: params[:session][:email].downcase)
     if @user&.authenticate(params[:session][:password])
-      reset_session
-      log_in @user
-      flash[:success] = "login success"
-      redirect_to @user
+      success_create
     else
       flash[:danger] = "invalid email or password "
       redirect_to login_path
@@ -29,4 +26,12 @@ private
 
 def log_ina
   redirect_to(root_url, status: :see_other) unless logged_in?
+end
+
+def success_create
+  reset_session
+  params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
+  log_in @user
+  flash[:success] = "login success"
+  redirect_to @user
 end
