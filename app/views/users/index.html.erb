@@ -1,0 +1,9 @@
+<div class="index">
+<% @users.each do |user| %>
+  <%= user.name %>
+  <%= image_tag user.avatar.variant(:thumb) if user.avatar.attached?%>
+  <% if current_user.admin? %>
+    <%= link_to 'delete', user, data: { 'turbo-method': :delete, turbo_confirm: "You sure?" } %>
+  <% end %>
+<% end %>
+</div>

@@ -19,14 +19,14 @@ default: &default
 
 development:
   <<: *default
-  database: wind_surf_development
+  database: wind_surfs_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: wind_surf_test
+  database: wind_surfs_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -50,6 +50,6 @@ test:
 #
 production:
   <<: *default
-  database: wind_surf_production
-  username: wind_surf
+  database: wind_surfs_production
+  username: wind_surfs
   password: <%= ENV["WIND_SURF_DATABASE_PASSWORD"] %>
