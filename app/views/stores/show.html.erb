@@ -1,0 +1,27 @@
+<main>
+  <div class="container card" >
+    <div class="row">
+      <div class="col-xs-2"></div>
+      <div class="col-xs-10 col-sm-5">
+        <%= image_tag @store.image, class: "imagesize"  %>
+      </div>
+      <div class="col-xs-5 col-sm-5">
+        <div class="card-body">
+          <h5 class="card-title">店舗名: <%= @store.store_name %></h5>
+          <p class="card-text">住所: <%= @store.address %></p>
+          
+          <p class="card-text">電話番号: <%= @store.phone_number %></p>
+          
+          <p class="card-text">営業時間: <%= @store.time %></p>
+          <p class="card-text">定休日: <%= @store.day %></p>
+          <p class="card-text">料金: <%= @store.price %></p>
+          
+          <p class="card-text">艇庫: <%= @store.boat_house %></p>
+          
+        </div>
+      </div>
+    </div>
+    
+    <%= link_to '戻る', :back %>
+  </div>
+</main>

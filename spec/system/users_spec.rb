@@ -26,14 +26,12 @@ RSpec.describe 'User', type: :system do
     fill_in 'Password confirmation', with: 'jjjjjj'
     click_on 'create account'
     expect(current_path).to eq new_user_path
+    expect(page).to have_content "can't be blank"
   end
 
   scenario "update account" do
     login(user)
     visit edit_user_path(user)
-    user.avatar.attach(io: File.open(
-        Rails.root.join('app', 'assets', 'images', 'default_icon.jpg') # rubocop:disable all
-      ), filename: 'default_icon.jpg', content_type: 'image/jpg')
     fill_in 'Name', with: 'eeee'
     fill_in 'Email', with: user.email
     click_on 'Save Change'

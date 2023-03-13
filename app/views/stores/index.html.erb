@@ -1,0 +1,12 @@
+<div>
+  <% if flash[:success] %>
+    <%=  flash[:success] %>
+  <% end %>
+</div>
+<% @stores.each do |store| %>
+  <%= link_to store.store_name, store %>
+  <%= image_tag store.image.variant(:thumb).processed %>
+  <% if current_user.admin? %>
+    <%= link_to 'delete', store, data: { 'turbo-method': :delete, turbo_confirm: 'You sure?'} %>
+  <% end %>
+<% end %>

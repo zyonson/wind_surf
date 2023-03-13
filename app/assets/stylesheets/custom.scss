@@ -1,6 +1,5 @@
-@import 'bootstrap-sprockets';
-@import 'bootstrap';
-
+@import "bootstrap-sprockets";
+@import "bootstrap";
 /* universal */
 
 body {
@@ -75,4 +74,8 @@ footer ul li {
 #session_remember_me {
   width: auto;
   margin-left: 0;
+}
+
+.imagesize {
+  width: 300px;
 }
