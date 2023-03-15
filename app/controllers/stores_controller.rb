@@ -1,8 +1,8 @@
 class StoresController < ApplicationController
-  before_action :admin_user!, except: [:index, :show]
+  before_action :admin_user!, except: [:index, :show, :search]
   include SessionsHelper
   def index
-    @stores = Store.all
+    @allstores = Store.all
   end
 
   def show
@@ -45,6 +45,10 @@ class StoresController < ApplicationController
     flash[:success] = "delete store"
     redirect_to stores_path status: :see_other
   end
+
+  def search
+    search_method
+  end
 end
 
 private
@@ -70,4 +74,26 @@ def create_faile
   session[:store] = @store.attributes.slice(*store_params.keys)
   flash[:danger] = @store.errors.full_messages
   redirect_to new_store_path
+end
+
+def search_methoad
+  @stores = if params[:title_search].present?
+              Store.where("store_name LIKE ? OR prefecture LIKE ?", "%#{params[:title_search]}%",
+                          "%#{params[:title_search]}%").order(created_at: :desc)
+            else
+              []
+            end
+  search_methoad1
+end
+
+def search_methoad1
+  respond_to do |format|
+    format.turbo_stream do
+      render turbo_stream: [
+        turbo_stream.update('search_results',
+                            partial: 'stores/search_results',
+                            locals: { stores: @stores })
+      ]
+    end
+  end
 end

@@ -3,10 +3,14 @@
     <%=  flash[:success] %>
   <% end %>
 </div>
-<% @stores.each do |store| %>
+
+<%= render "stores/search_form" %>
+<div>
+<% @allstores.each do |store| %>
   <%= link_to store.store_name, store %>
-  <%= image_tag store.image.variant(:thumb).processed %>
+  <%= image_tag store.image.variant(:thumb) %>
   <% if current_user.admin? %>
     <%= link_to 'delete', store, data: { 'turbo-method': :delete, turbo_confirm: 'You sure?'} %>
   <% end %>
 <% end %>
+</div>

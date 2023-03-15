@@ -1,0 +1,5 @@
+<%= form_with url: search_stores_path, method: :post do |form| %>
+    <%= form.search_field :title_search, value: params[:title_search], oninput: "this.form.requestSubmit()" %>
+<% end %>
+
+<div id="search_results"></div>

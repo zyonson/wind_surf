@@ -1,0 +1,6 @@
+<% @users.each do |user| %>
+  <div class="searchuser">
+    <%= image_tag user.avatar.variant(:thumb) %>
+    <%= user.name %>
+  </diV>    
+<% end %>

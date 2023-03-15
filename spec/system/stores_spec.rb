@@ -57,4 +57,10 @@ RSpec.describe 'Store', type: :system do
     expect(current_path).to eq stores_path
     expect(page).to have_content('usss')
   end
+  scenario 'search' do
+    login(user)
+    visit stores_path
+    fill_in 'title_search', with: 'gg'
+    expect(page).to have_content('gg')
+  end
 end

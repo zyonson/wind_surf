@@ -49,6 +49,10 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     redirect_to new_user_path status: :see_other
   end
+
+  def search
+    @users = User.where("name LIKE ? OR email LIKE?", "%#{params[:user_search]}%", "%#{params[:user_search]}%")
+  end
 end
 
 private

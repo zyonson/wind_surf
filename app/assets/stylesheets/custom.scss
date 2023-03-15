@@ -3,7 +3,11 @@
 /* universal */
 
 body {
-  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+}
+header{ 
+  
 }
 
 section {
@@ -19,7 +23,6 @@ textarea {
 }
 
 .center h1 {
-  margin-bottom: 10px;
 }
 
 /* Dropdown menu */
@@ -33,8 +36,6 @@ textarea {
 footer {
   border-top: 1px solid #eaeaea;
   color: #777;
-  position: absolute;
-  bottom: 0;
 }
 footer a {
   color: #555;
@@ -79,3 +80,4 @@ footer ul li {
 .imagesize {
   width: 300px;
 }
+

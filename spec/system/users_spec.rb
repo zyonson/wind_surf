@@ -39,4 +39,14 @@ RSpec.describe 'User', type: :system do
     expect(user.reload.name).to eq 'eeee'
     visit users_path
   end
+
+  scenario "seach user" do
+    login(user)
+    visit users_path
+    fill_in 'user_search', with: "awoooooo"
+    click_on 'search'
+    within '.searchuser' do
+      expect(page).to have_content 'awoooooo'
+    end
+  end
 end
