@@ -11,6 +11,7 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX }
   has_secure_password
   validates :password, length: { minimum: 6 }, presence: true, allow_nil: true
+  validates :avatar, content_type: [:png, :jpg, :jpeg], size: { less_than: 10.megabytes }
   def self.digest(string)
     cost = if ActiveModel::SecurePassword.min_cost
              BCrypt::Engine::MIN_COST

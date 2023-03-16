@@ -1,0 +1,8 @@
+<%= stores.count %>
+<% stores.each do |store| %>
+  <br>
+  <%= link_to store do %>
+    <%= highlight(store.store_name, params.dig(:title_search)) %>
+  <% end %>
+  <%= image_tag store.image, class: "imagesize"  %>
+<% end %>

@@ -1,0 +1,31 @@
+<%= form_with(model: @store) do |f| %>
+  <%= render 'shared/error_messages', store: @store %>
+  <%= f.label :store_name %>
+  <%= f.text_field :store_name, class: 'form-control' %>
+
+  <%= f.label :address %>
+  <%= f.text_field :address, class: 'form-control' %>
+
+  <%= f.label :phone_number %>
+  <%= f.text_field :phone_number, class: 'form-control' %>
+
+  <%= f.label :boat_house %>
+  <%= f.text_field :boat_house, class: 'form-control' %>
+
+  <%= f.label :price %>
+  <%= f.text_field :price, class: 'form-control' %>
+
+  <%= f.label :day %>
+  <%= f.text_field :day, class: 'form-control' %>
+
+  <%= f.label :time %>
+  <%= f.text_field :time, class: 'form-control' %>
+
+  <%= f.label :prefecture %>
+  <%= f.text_field :prefecture, class: 'form-control' %>
+
+  <%= f.label :image %>
+  <%= f.file_field :image %>
+
+  <%=f.submit yield(:button_text), class: "btn btn-primary" %> 
+<% end %>

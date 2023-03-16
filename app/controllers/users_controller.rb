@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    @user = User.new(session[:user] || {})
   end
 
   def create  # rubocop:disable all
@@ -24,6 +24,7 @@ class UsersController < ApplicationController
       flash[:success] = 'create your account!'
       redirect_to @user
     else
+      session[:user] = @user.attributes.slice(*user_params.keys)
       flash[:danger] = @user.errors.full_messages
       redirect_to new_user_path
     end
@@ -46,7 +47,11 @@ class UsersController < ApplicationController
 
   def destroy
     User.find(params[:id]).destroy
-    redirect_to new_user_path :see_other
+    redirect_to new_user_path status: :see_other
+  end
+
+  def search
+    @users = User.where("name LIKE ? OR email LIKE?", "%#{params[:user_search]}%", "%#{params[:user_search]}%")
   end
 end
 
