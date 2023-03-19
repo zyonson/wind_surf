@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
   before_action :log_in_as, only: [:edit, :index]
+  before_action :new_user, only: :new
   include SessionsHelper
 
   def index
-    @users = User.all
+    @users = User.with_attached_avatar
   end
 
   def show
@@ -75,4 +76,8 @@ end
 
 def log_in_as
   redirect_to(login_path, status: :see_other) if current_user.nil?
+end
+
+def new_user
+  redirect_to current_user if logged_in?
 end

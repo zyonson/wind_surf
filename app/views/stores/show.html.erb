@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xs-2"></div>
       <div class="col-xs-10 col-sm-5">
-        <%= image_tag @store.image, class: "imagesize"  %>
+        <%= image_tag @store.image, class: "img-size"  %>
       </div>
       <div class="col-xs-5 col-sm-5">
         <div class="card-body">
@@ -21,6 +21,9 @@
         </div>
       </div>
     </div>
+    <%= flash[:notice] %>
+    <%= render 'stores/post_create'%>
+    <%= render 'stores/post_index', microposts: @microposts %>
     
     <%= link_to '戻る', :back %>
   </div>

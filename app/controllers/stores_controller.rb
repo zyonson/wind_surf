@@ -1,12 +1,27 @@
 class StoresController < ApplicationController
-  before_action :admin_user!, except: [:index, :show, :search]
+  before_action :admin_user!, except: [:index, :show, :search, :main, :searchstore]
   include SessionsHelper
+
+  def main; end
+
+  def searchstore
+    @stores = Store.where("store_name LIKE ? OR prefecture LIKE ?", "%#{params[:store_search]}%",
+                          "%#{params[:store_search]}%")
+    flash[:notice] = if @stores.nil?
+                       "検索結果は０件です"
+                     else
+                       "検索結果は#{@stores.count}件です"
+                     end
+  end
+
   def index
-    @allstores = Store.all
+    @allstores = Store.with_attached_image
   end
 
   def show
     @store = Store.find(params[:id])
+    @microposts = @store.microposts
+    @micropost = Micropost.new
   end
 
   def new
@@ -46,15 +61,31 @@ class StoresController < ApplicationController
     redirect_to stores_path status: :see_other
   end
 
+# rubocop:disable all
   def search
-    search_method
+    @stores = if params[:title_search].present?
+                Store.where("store_name LIKE ? OR prefecture LIKE ?", "%#{params[:title_search]}%",
+                            "%#{params[:title_search]}%").order(created_at: :desc)
+              else
+                []
+              end
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.update('search_results',
+                              partial: 'stores/search_results',
+                              locals: { stores: @stores })
+        ]
+      end
+    end
   end
 end
+# rubocop:enable all
 
 private
 
 def admin_user!
-  redirect_to stores_path unless current_user.admin?
+  redirect_to stores_path unless logged_in? && current_user.admin?
 end
 
 def store_params
@@ -74,26 +105,4 @@ def create_faile
   session[:store] = @store.attributes.slice(*store_params.keys)
   flash[:danger] = @store.errors.full_messages
   redirect_to new_store_path
-end
-
-def search_methoad
-  @stores = if params[:title_search].present?
-              Store.where("store_name LIKE ? OR prefecture LIKE ?", "%#{params[:title_search]}%",
-                          "%#{params[:title_search]}%").order(created_at: :desc)
-            else
-              []
-            end
-  search_methoad1
-end
-
-def search_methoad1
-  respond_to do |format|
-    format.turbo_stream do
-      render turbo_stream: [
-        turbo_stream.update('search_results',
-                            partial: 'stores/search_results',
-                            locals: { stores: @stores })
-      ]
-    end
-  end
 end

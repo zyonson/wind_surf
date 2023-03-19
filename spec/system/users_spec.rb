@@ -29,6 +29,12 @@ RSpec.describe 'User', type: :system do
     expect(page).to have_content "can't be blank"
   end
 
+  scenario 'fail to create if user already login' do
+    login(user)
+    visit new_user_path
+    expect(current_path).to eq user_path(user)
+  end
+
   scenario "update account" do
     login(user)
     visit edit_user_path(user)

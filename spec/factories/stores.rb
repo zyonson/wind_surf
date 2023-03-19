@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :store do
-    store_name { "gg" }
+    store_name { "ポポロ" }
     address { "MyString" }
     phone_number { "09090909090" }
     boat_house { "MyString" }

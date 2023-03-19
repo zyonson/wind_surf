@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "users#new"
+  root "stores#main"
   get '/signup', to: "users#new"
   resources :users do
     collection do
@@ -12,7 +12,10 @@ Rails.application.routes.draw do
 
   resources :stores do
     collection do
+      get :searchstore
       post :search
+      get :main
     end
   end
+  resources :microposts, only: [:create, :destroy]
 end
