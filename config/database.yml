@@ -50,6 +50,9 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
+  encoding: unicode
   database: wind_surfs_production
   username: wind_surfs
   password: <%= ENV["WIND_SURF_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
