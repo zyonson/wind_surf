@@ -1,0 +1,12 @@
+<div id="favorite_<%= @store.id %>">
+  <% if !Favorite.exists?(user: current_user, store_id: @store.id)%>
+    <%= button_to store_favorites_path(@store) do %>
+    <%= image_tag 'default_icon.jpg', :alt =>"#{@store.store_name}未登録" %>
+    <% end %>
+  <% else %> 
+  <%= link_to store_favorite_path(@store), data: { 'turbo-method': :delete} do %>
+    <%= image_tag 'default_store.jpg', :alt =>"#{@store.store_name}登録" %>
+    <% end %>
+  <% end %>
+</div>
+

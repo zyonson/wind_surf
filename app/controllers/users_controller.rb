@@ -10,6 +10,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @favorites = Favorite.where(user_id: params[:id]).pluck(:store_id)
+    @stores = Store.where(id: @favorites).with_attached_image
   end
 
   def new

@@ -98,3 +98,28 @@ footer ul li {
     margin-left: 200px;
   }
 }
+
+/* main-page */
+.main-image {
+  background-image: image-url('default_store.jpg');
+  height: 800px;
+  background-size: cover;
+}
+
+.header{
+  margin: auto;
+  padding-top: 50px;
+  width:40%
+}
+.title{
+  color:white;
+  text-align: center;
+}
+.search{
+  text-align:center;
+}
+@media screen and (max-width: 600px) {
+	.main-image{
+    background-image: image-url('main-image.png');
+  }
+}

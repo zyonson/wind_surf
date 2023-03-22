@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       get :search
+      get :favorites
     end
   end
   get '/login', to: "sessions#new"
@@ -17,5 +18,10 @@ Rails.application.routes.draw do
       get :main
     end
   end
+
+  resources :stores do
+    resources :favorites, only: [:create, :destroy]
+  end
+
   resources :microposts, only: [:create, :destroy]
 end

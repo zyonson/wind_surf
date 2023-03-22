@@ -1,12 +1,11 @@
 class StoresController < ApplicationController
   before_action :admin_user!, except: [:index, :show, :search, :main, :searchstore]
-  include SessionsHelper
 
   def main; end
 
   def searchstore
-    @stores = Store.where("store_name LIKE ? OR prefecture LIKE ?", "%#{params[:store_search]}%",
-                          "%#{params[:store_search]}%")
+    @stores = Store.with_attached_image.where("store_name LIKE ? OR prefecture LIKE ?", "%#{params[:store_search]}%",
+                                              "%#{params[:store_search]}%")
     flash[:notice] = if @stores.nil?
                        "検索結果は０件です"
                      else
@@ -22,6 +21,9 @@ class StoresController < ApplicationController
     @store = Store.find(params[:id])
     @microposts = @store.microposts
     @micropost = Micropost.new
+    return unless logged_in?
+
+    @favorite = Favorite.where(store_id: @store.id, user_id: current_user.id)
   end
 
   def new

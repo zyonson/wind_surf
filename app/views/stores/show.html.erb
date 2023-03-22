@@ -20,11 +20,14 @@
           <p class="card-text">県: <%= @store.prefecture %></p>
         </div>
       </div>
+      <% if logged_in? %>
+      <%= render 'shared/favorite' %>
+      <% end %>
     </div>
     <%= flash[:notice] %>
     <%= render 'stores/post_create'%>
     <%= render 'stores/post_index', microposts: @microposts %>
-    
+    <%= flash %>
     <%= link_to '戻る', :back %>
   </div>
 </main>
