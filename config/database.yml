@@ -50,6 +50,7 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
   database: wind_surfs_production
   username: wind_surfs
   password: <%= ENV["WIND_SURF_DATABASE_PASSWORD"] %>
