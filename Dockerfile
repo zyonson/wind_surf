@@ -6,7 +6,6 @@ WORKDIR $APP_ROOT
 COPY Gemfile $APP_ROOT/Gemfile
 COPY Gemfile.lock $APP_ROOT/Gemfile.lock
 RUN apt-get update && apt-get install -y libvips42
-RUN yarn install --frozen-lockfile
 RUN bundle install
 
 COPY . $APP_ROOT
