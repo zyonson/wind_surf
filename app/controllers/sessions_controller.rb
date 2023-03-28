@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  include SessionsHelper
   before_action :log_ina, only: :edit
   before_action :login_user, only: :new
   def new; end

@@ -1,5 +1,4 @@
 class MicropostsController < ApplicationController
-  include SessionsHelper
   before_action :login_user?
 
   def create

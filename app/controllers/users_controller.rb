@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
   before_action :log_in_as, only: [:edit, :index]
   before_action :new_user, only: :new
-  include SessionsHelper
 
   def index
     @users = User.with_attached_avatar

@@ -51,6 +51,7 @@ test:
 production:
   <<: *default
   adapter: postgresql
-  database: wind_surfs_production
-  username: wind_surfs
-  password: <%= ENV["WIND_SURF_DATABASE_PASSWORD"] %>
+  host: <%= Rails.application.credentials.rds[:host] %>
+  database: <%= Rails.application.credentials.rds[:database] %>
+  username: <%= Rails.application.credentials.rds[:username] %>
+  password: <%= Rails.application.credentials.rds[:password] %>
