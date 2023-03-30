@@ -6,11 +6,9 @@ WORKDIR $APP_ROOT
 COPY Gemfile $APP_ROOT/Gemfile
 COPY Gemfile.lock $APP_ROOT/Gemfile.lock
 RUN apt-get update && apt-get install -y libvips42
-RUN apt-get install -y vim
 RUN bundle install
 
 COPY . $APP_ROOT
-
 
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh

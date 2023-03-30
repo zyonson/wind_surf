@@ -1,23 +1,36 @@
 version: '3'
 services:
-# =========ローカルと本番切り替え===========
-#   image: mysql:8.0
-#   environment:
-#      MYSQL_ROOT_PASSWORD: password
-#      MYSQL_DATABASE: root
-#    ports:
-#      - "3306:3306"
-#    volumes:
-#    -  ./db/mysql/volumes:/var/lib/mysql
-# ======================================
-  web:
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+  app:
+    build:
+      context: .
+    env_file:
+      - ./environments/db.env
+    command: bundle exec puma -C config/puma.rb
     volumes:
       - .:/wind_surf
-    ports:
-      - "3000:3000"
-#    depends_on:
-#      - db
+      - ./public:/wind_surf/public
+      - ./tmp:/wind_surf/tmp
+      - ./log:/wind_surf/log
+    depends_on:
+      - db
     tty: true
     stdin_open: true
+  db:
+    image: mysql:8.0
+    env_file:
+      - ./environments/db.env
+    ports:
+      - "3306:3306"
+    volumes:
+    -  ./db/mysql/volumes:/var/lib/mysql
+
+  web:
+    build: 
+      context: containers/nginx
+    volumes:
+      - ./public:/wind_surf/public
+      - ./tmp:/wind_surf/tmp
+    ports:
+      - "80:80"
+    depends_on:
+      - db
