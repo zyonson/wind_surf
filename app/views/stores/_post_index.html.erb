@@ -1,0 +1,16 @@
+<%= 'コメント欄' %>
+<% microposts.each do |post| %>
+  <div class="card">
+    <div class="card-header">
+      <%= post.title %>
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <%= post.content %>
+      </blockquote>
+    </div>
+  </div>
+  <div>
+    <%= link_to "削除", micropost_path(post), data: { 'turbo-method': :delete, turbo_confirm: 'You sure?'} %>
+  </div>
+<% end %>

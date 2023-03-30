@@ -12,8 +12,8 @@ RSpec.describe 'Store', type: :system do
   scenario "delete store if admin user" do
     login(admin)
     visit stores_path
-    click_on "gg"
-    expect(current_path).to eq store_path(store.id)
+    click_on "delete"
+    expect(current_path).to eq stores_path
   end
 
   scenario "delete store if admin user" do
@@ -60,7 +60,14 @@ RSpec.describe 'Store', type: :system do
   scenario 'search' do
     login(user)
     visit stores_path
-    fill_in 'title_search', with: 'gg'
-    expect(page).to have_content('gg')
+    fill_in 'title_search', with: 'ポポロ'
+    expect(page).to have_content('ポポロ')
+  end
+  scenario 'search_store' do
+    visit root_path
+    fill_in 'store_search', with: 'ポポロ'
+    click_on '検索'
+    expect(page).to have_content('ポポロ')
+    expect(current_path).to eq searchstore_stores_path
   end
 end

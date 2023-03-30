@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
-  include SessionsHelper
   before_action :log_ina, only: :edit
-
+  before_action :login_user, only: :new
   def new; end
 
   def create
@@ -26,6 +25,10 @@ private
 
 def log_ina
   redirect_to(root_url, status: :see_other) unless logged_in?
+end
+
+def login_user
+  redirect_to current_user if logged_in?
 end
 
 def success_create

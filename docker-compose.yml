@@ -1,23 +1,36 @@
 version: '3'
 services:
+  app:
+    build:
+      context: .
+    env_file:
+      - ./environments/db.env
+    command: bundle exec puma -C config/puma.rb
+    volumes:
+      - .:/wind_surf
+      - ./public:/wind_surf/public
+      - ./tmp:/wind_surf/tmp
+      - ./log:/wind_surf/log
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true
   db:
     image: mysql:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: root
+    env_file:
+      - ./environments/db.env
     ports:
       - "3306:3306"
     volumes:
     -  ./db/mysql/volumes:/var/lib/mysql
 
   web:
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    build: 
+      context: containers/nginx
     volumes:
-      - .:/wind_surf
+      - ./public:/wind_surf/public
+      - ./tmp:/wind_surf/tmp
     ports:
-      - "3000:3000"
+      - "80:80"
     depends_on:
       - db
-    tty: true
-    stdin_open: true

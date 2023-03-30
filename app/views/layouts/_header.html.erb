@@ -1,26 +1,43 @@
-<header class='navbar navbar-inverse'>
-  <div class='container'>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
     <%= link_to 'wind_surf', root_path, id: 'logo' %>
-    <nav class='navbar-expand-lg'>
-      <ul class='nav navbar-nav navbar-right'>
-        <%= link_to 'Home', root_path %></li>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav nav-space">
+        <li class="nav-item">
+          <%= link_to 'Home', root_path %></li>
+        </li>
         <% if logged_in? %>
-          <li><%= link_to 'Users', '#' %></li>
-          <li class='dropdown'>
-            <a href='#' id='account' class='dropdown-toggle'>
-              Account  <b class='caret'></b>
+          <li><%= link_to 'Users', users_path%></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            User menu
             </a>
-            <ul id='dropdown-menu' class='dropdown-menu'>
-              <li><%= link_to 'Profile', current_user %></li>
-              <li><%= link_to 'settings', edit_user_path(current_user) %></li>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><%= link_to 'Profile', current_user, class:"dropdown-item" %></li>
+              <li><%= link_to 'settings', edit_user_path(current_user), class:"dropdown-item" %></li>
               <li class='divider'><li>
-              <li><%= link_to 'logout', logout_path, data: { 'turbo-method': :delete } %></li>
+              <li><%= link_to 'logout', logout_path, data: { 'turbo-method': :delete }, class:"dropdown-item" %></li>
             </ul>
           </li>
+          <% if admin? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              admin menu
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><%= link_to 'create_store', new_store_path, class:"dropdown-item" %></li>
+                <li><%= link_to 'stores', stores_path, class:"dropdown-item" %></li>
+                <li class='divider'><li>
+              </ul>
+            </li>
+          <% end %>
         <% else %>
-          <li><%= link_to 'log in', login_path %></li>
+          <li class='login'><%= link_to 'log in', login_path %></li>
         <% end %>
       </ul>
-    </nav>
+    </div>
   </div>
-</header>
+</nav>

@@ -1,8 +1,13 @@
 <%= stores.count %>
-<% stores.each do |store| %>
-  <br>
-  <%= link_to store do %>
-    <%= highlight(store.store_name, params.dig(:title_search)) %>
+<div class='flex'>
+  <% stores.each do |store| %>
+    <div class='card' style='width: 18rem;'>
+    <%= link_to store do %>
+      <%= highlight(store.store_name, params.dig(:title_search)) %>
+    <% end %>
+      <div class='card-body'>
+      <%= image_tag store.image, class: "img-size"  %>
+      </div>
+    </div>
   <% end %>
-  <%= image_tag store.image, class: "imagesize"  %>
-<% end %>
+</div>

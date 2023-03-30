@@ -1,11 +1,10 @@
 <main>
   <div class="container card" >
     <div class="row">
-      <div class="col-xs-2"></div>
-      <div class="col-xs-10 col-sm-5">
-        <%= image_tag @store.image, class: "imagesize"  %>
+      <div class="col-12 col-sm-7">
+        <%= image_tag @store.image, class: "img-size"  %>
       </div>
-      <div class="col-xs-5 col-sm-5">
+      <div class="col-12 col-sm-5">
         <div class="card-body">
           <h5 class="card-title">店舗名: <%= @store.store_name %></h5>
           <p class="card-text">住所: <%= @store.address %></p>
@@ -20,8 +19,19 @@
           <p class="card-text">県: <%= @store.prefecture %></p>
         </div>
       </div>
+      <% if logged_in? %>
+      <%= render 'shared/favorite' %>
+      <% end %>
     </div>
-    
+    <%= flash[:notice] %>
+    <div class='row'>
+    <div class="col-12 col-sm-6">
+      <%= render 'stores/post_create'%>
+    </div>
+    <div class="col-12 col-sm-6">
+      <%= render 'stores/post_index', microposts: @microposts %>
+    </div>
+    </div>
     <%= link_to '戻る', :back %>
   </div>
 </main>

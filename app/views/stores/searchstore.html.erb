@@ -1,0 +1,20 @@
+<%= flash[:notice] %>
+<div class='flex'>
+<% @stores.each do |store| %>
+  <div class='card' style='width: 18rem;'>
+  <%= image_tag store.image, class: "card-img-top img-size" %>
+    <div class='card-body'>
+      <h5 class='card-title'><%= store.store_name %></h5>
+      <p class='card-text'><%= store.address %></p>
+    </div>
+    <ul class='list-group list-group-flush'>
+      <li class='list-group-item'><%= store.time %></li>
+      <li class='list-group-item'><%= store.day %></li>
+      <li class='list-group-item'><%= store.price %></li>
+    </ul>
+    <div class='card-body'>
+      <%= link_to "お店の詳細ページはこちらから", store_path(store.id), {class:'card-link'} %>
+    </div>
+  </div>
+<% end %>
+</div>

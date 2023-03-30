@@ -9,3 +9,28 @@
     </section>
   </aside>
 </div>
+<h1 class='space'>お気に入り店舗</h1>
+<div class='flex'>
+<% @stores.each do |store| %>
+  <div class='card side-space' style='width: 18rem;'>
+  <%= image_tag store.image, class: "card-img-top img-size" %>
+    <div class='card-body'>
+      <h5 class='card-title'><%= store.store_name %></h5>
+      <p class='card-text'><%= store.address %></p>
+    </div>
+    <ul class='list-group list-group-flush'>
+      <li class='list-group-item'><%= store.time %></li>
+      <li class='list-group-item'><%= store.day %></li>
+      <li class='list-group-item'><%= store.price %></li>
+    </ul>
+    <div class='card-body'>
+      <%= link_to "お店の詳細はこちらから", store, {class:'card-link'} %>
+    </div>
+    <div>
+      <% if logged_in? && current_user.admin? %>
+        <%= link_to 'delete', store, data: { 'turbo-method': :delete, turbo_confirm: 'You sure?'} %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+</div>

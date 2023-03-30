@@ -6,14 +6,23 @@
       <%= flash[:danger] %>
     <% end %>
   </div>
+  <div>
   <%= f.label :email %>
   <%= f.email_field :email %>
+  </div>
+  <div class= "space">
   <%= f.label :password %>
   <%= f.password_field :password %>
-
+</div>
+<div class= "space">
   <%= f.label :remember_me, class: 'checkbox inline' do %>
     <%= f.check_box :remember_me %>
     <span>Remember me on this computer</span>
   <% end %>
+</div>
   <%= f.submit "Log in" %>
 <% end %>
+
+<div class= "space">
+  <%= link_to "user新規作成", new_user_path %>
+</div>

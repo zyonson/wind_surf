@@ -1,6 +1,8 @@
 <% @users.each do |user| %>
   <div class="searchuser">
     <%= image_tag user.avatar.variant(:thumb) %>
-    <%= user.name %>
+    <%= link_to user do %>
+      <%= user.name %>
+    <% end %>
   </diV>    
 <% end %>

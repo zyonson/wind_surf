@@ -1,0 +1,16 @@
+<div class="card-body text-center mt-4">
+<%= render "shared/error_messages" %>
+  <%= form_with model: @micropost do |f| %>
+    <div>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="mt-4">
+      <%= f.label :content %>
+      <%= f.text_area :content %>
+      <%= f.hidden_field :store_id, value: @store.id %>
+    </div>
+    <br>
+    <%= f.submit 'コメントする' %>
+  <% end %>
+</div>
