@@ -13,7 +13,7 @@
       <li class='list-group-item'><%= store.price %></li>
     </ul>
     <div class='card-body'>
-      <%= link_to "お店のURLはこちらから", stores_path, {class:'card-link'} %>
+      <%= link_to "お店の詳細ページはこちらから", store_path(store.id), {class:'card-link'} %>
     </div>
   </div>
 <% end %>

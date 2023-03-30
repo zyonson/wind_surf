@@ -5,25 +5,37 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav mmu">
+      <ul class="navbar-nav nav-space">
         <li class="nav-item">
-          <%= link_to 'Home', root_path, class:"mmc" %></li>
+          <%= link_to 'Home', root_path %></li>
         </li>
         <% if logged_in? %>
-          <li><%= link_to 'Users', '#', class:"mmc"%></li>
-          <li class="nav-item dropdown mmu">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown link
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><%= link_to 'Profile', current_user, class:"dropdown-item" %></li>
-            <li><%= link_to 'settings', edit_user_path(current_user), class:"dropdown-item" %></li>
-            <li class='divider'><li>
-            <li><%= link_to 'logout', logout_path, data: { 'turbo-method': :delete }, class:"dropdown-item" %></li>
-          </ul>
+          <li><%= link_to 'Users', users_path%></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            User menu
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><%= link_to 'Profile', current_user, class:"dropdown-item" %></li>
+              <li><%= link_to 'settings', edit_user_path(current_user), class:"dropdown-item" %></li>
+              <li class='divider'><li>
+              <li><%= link_to 'logout', logout_path, data: { 'turbo-method': :delete }, class:"dropdown-item" %></li>
+            </ul>
           </li>
+          <% if admin? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              admin menu
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><%= link_to 'create_store', new_store_path, class:"dropdown-item" %></li>
+                <li><%= link_to 'stores', stores_path, class:"dropdown-item" %></li>
+                <li class='divider'><li>
+              </ul>
+            </li>
+          <% end %>
         <% else %>
-          <li><%= link_to 'log in', login_path %></li>
+          <li class='login'><%= link_to 'log in', login_path %></li>
         <% end %>
       </ul>
     </div>

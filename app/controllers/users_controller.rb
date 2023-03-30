@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :new_user, only: :new
 
   def index
-    @users = User.with_attached_avatar
+    @users = User.all.with_attached_avatar
   end
 
   def show

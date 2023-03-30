@@ -23,10 +23,18 @@ textarea {
 .center h1 {
 }
 
+.hanburger{
+
+}
 /* Dropdown menu */
 
 .dropdown-menu.active {
   display: block;
+}
+@media screen and (min-width: 992px) {
+.login{
+  margin-left:50px;
+}
 }
 
 /* footer */
@@ -89,15 +97,20 @@ footer ul li {
   margin-top:5%;
   margin-left: 5%;
 }
-
+.nav-space{
+  margin-left:90%;
+}
 @media screen and (min-width: 992px) {
-	.mmu{
-    margin-left: 10%;
+	.nav-space{
+    margin-left:70%;
   }
-  .mmc{
-    margin-left: 200px;
+  .navbar-nav {
+    li{
+      margin-left:20px;
+    }
   }
 }
+
 
 /* main-page */
 .main-image {
