@@ -83,5 +83,5 @@ end
 
 group :production do
   gem 'dotenv-rails'
-  gem 'postgresql'
+  gem 'pg'
 end
