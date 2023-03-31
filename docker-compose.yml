@@ -5,23 +5,24 @@ services:
       context: .
     env_file:
       - ./environments/db.env
-    command: bundle exec puma -C config/puma.rb -e production
+    command: bundle exec puma -C config/puma.rb
     volumes:
       - .:/wind_surf
       - ./public:/wind_surf/public
       - ./tmp:/wind_surf/tmp
       - ./log:/wind_surf/log
-#    depends_on:
-#      - db
-#    tty: true
-#    stdin_open: true
-#    image: mysql:8.0
-#    env_file:
-#      - ./environments/db.env
-#    ports:
-#      - "3306:3306"
-#    volumes:
-#    -  ./db/mysql/volumes:/var/lib/mysql
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true
+  db:
+    image: mysql:8.0
+    env_file:
+      - ./environments/db.env
+    ports:
+      - "3306:3306"
+    volumes:
+    -  ./db/mysql/volumes:/var/lib/mysql
 
   web:
     build: 
@@ -31,5 +32,5 @@ services:
       - ./tmp:/wind_surf/tmp
     ports:
       - "80:80"
-#    depends_on:
-#      - db
+    depends_on:
+      - db
