@@ -5,7 +5,7 @@ services:
       context: .
     env_file:
       - .env
-    command: bundle exec puma -C config/puma.rb
+    command: bundle exec puma -C config/puma.rb -e production
     volumes:
       - .:/wind_surf
       - ./public:/wind_surf/public
