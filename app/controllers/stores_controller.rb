@@ -92,7 +92,7 @@ end
 
 def store_params
   params.require(:store).permit(:store_name, :address, :phone_number, :boat_house, :price, :day, :time, :prefecture,
-                                :image)
+                                :latitude, :longitude, :image)
 end
 
 def image_check

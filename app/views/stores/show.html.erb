@@ -33,5 +33,9 @@
     </div>
     </div>
     <%= link_to '戻る', :back %>
+    <% if logged_in? && current_user.admin? %>
+      <%= link_to 'edit', edit_store_path %>
+    <% end %>
   </div>
+  <%= render 'google_api' %>
 </main>
