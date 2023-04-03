@@ -8,9 +8,9 @@ services:
     command: bundle exec puma -C config/puma.rb -e production
     volumes:
       - .:/wind_surf
-      - ./public:/wind_surf/public
-      - ./tmp:/wind_surf/tmp
-      - ./log:/wind_surf/log
+      - public-data:/wind_surf/public
+      - tmp-data:/wind_surf/tmp
+      - log-data:/wind_surf/log
 #    depends_on:
 #      - db
 #    tty: true
@@ -28,9 +28,15 @@ services:
     build: 
       context: containers/nginx
     volumes:
-      - ./public:/wind_surf/public
-      - ./tmp:/wind_surf/tmp
+      - public-data:/wind_surf/public
+      - tmp-data:/wind_surf/tmp
     ports:
       - "80:80"
 #   depends_on:
 #      - db
+
+volumes:
+  public-data:
+  tmp-data:
+  log-data:
+  
