@@ -6,9 +6,6 @@ WORKDIR $APP_ROOT
 COPY Gemfile $APP_ROOT/Gemfile
 COPY Gemfile.lock $APP_ROOT/Gemfile.lock
 RUN apt-get update && apt-get install -y libvips42
-RUN mkdir -p tmp/sockets && \
-    mkdir -p /tmp/public && \
-    cp -rf $APP_ROOT/public/* /tmp/public
 RUN bundle install
 
 COPY . $APP_ROOT
