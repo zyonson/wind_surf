@@ -32,8 +32,6 @@ services:
       - tmp-data:/wind_surf/tmp
     ports:
       - 80:80
-    depends_on:
-      - app
 
 volumes:
   public-data:
